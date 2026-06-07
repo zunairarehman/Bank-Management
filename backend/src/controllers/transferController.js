@@ -85,7 +85,14 @@ exports.transferMoney = async (req, res) => {
       ],
       { session },
     );
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
 
+    const recentTransactions = await Transaction.countDocuments({
+      fromUserId: req.user._id,
+      createdAt: {
+        $gte: fiveMinutesAgo,
+      },
+    });
     await Notification.create(
       [
         {
@@ -105,6 +112,35 @@ exports.transferMoney = async (req, res) => {
       ],
       { session },
     );
+
+    if (recentTransactions === 4) {
+      await Notification.create(
+        [
+          {
+            userId: req.user._id,
+            title: "Fraud Warning",
+            message:
+              "Multiple transactions detected within 5 minutes. Please verify your account activity.",
+            type: "fraud",
+          },
+        ],
+        { session },
+      );
+    }
+
+    if (senderAccount.balance < 1000) {
+      await Notification.create(
+        [
+          {
+            userId: req.user._id,
+            title: "Low Balance Alert",
+            message: "Your account balance has fallen below PKR 1,000.",
+            type: "warning",
+          },
+        ],
+        { session },
+      );
+    }
 
     await session.commitTransaction();
 

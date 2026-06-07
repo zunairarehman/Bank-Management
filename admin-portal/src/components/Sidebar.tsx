@@ -13,6 +13,7 @@ import {
   LogOut,
   Moon,
   Sun,
+  Bell,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "./ThemeProvider";
@@ -25,6 +26,7 @@ const nav = [
   { href: "/accounts", label: "Accounts", icon: Wallet },
   { href: "/loans", label: "Loan Management", icon: Landmark },
   { href: "/repayments", label: "Repayment Tracking", icon: CreditCard },
+  { href: "/notifications", label: "Notifications", icon: Bell },
   { href: "/security", label: "Security", icon: Shield },
   { href: "/settings", label: "Settings", icon: Settings },
 ];

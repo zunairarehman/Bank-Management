@@ -51,6 +51,16 @@ export default function LoanManagement() {
           Track installments and remaining balance
         </Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => router.push("/notifications")}
+      >
+        <Text style={styles.cardTitle}>Notifications</Text>
+
+        <Text style={styles.cardText}>
+          View transaction alerts and reminders
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

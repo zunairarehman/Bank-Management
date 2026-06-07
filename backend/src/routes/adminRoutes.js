@@ -23,6 +23,7 @@ router.patch("/transactions/:id/flag", adminController.flagTransaction);
 router.get("/accounts", adminController.getAccounts);
 router.get("/audit-logs", adminController.getAuditLogs);
 router.get("/loan-applications", loanController.getLoanApplications);
+router.get("/notifications", adminController.getNotifications);
 
 router.put(
   "/loan-applications/:id/approve",

@@ -7,9 +7,11 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const loanRoutes = require("./routes/loanRoutes");
-const atmRoutes = require('./routes/atm.routes');
+const atmRoutes = require("./routes/atm.routes");
 const budgetRoutes = require("./routes/budget.routes");
 const creditRoutes = require("./routes/credit.routes");
+const notificationRoutes = require("./routes/notificationRoutes");
+const checkLoanReminders = require("./services/loanReminderService");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,7 +28,8 @@ app.use("/api/user", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api", budgetRoutes);
 app.use("/api/loans", loanRoutes);
-app.use("/api/credit", require("./routes/credit.routes"));
+app.use("/api/credit", creditRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);
@@ -35,6 +38,9 @@ app.use((err, _req, res, _next) => {
 
 const start = async () => {
   await connectDB();
+  checkLoanReminders();
+
+  setInterval(checkLoanReminders, 60 * 60 * 1000);
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Local:   http://localhost:${PORT}/api/health`);
