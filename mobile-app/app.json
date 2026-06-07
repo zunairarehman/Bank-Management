@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Bank AL Habib Mobile",
+    "slug": "bank-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "bankmobile",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#0c4a6e"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0c4a6e"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font"
+    ]
+  }
+}

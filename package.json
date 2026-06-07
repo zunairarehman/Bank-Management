@@ -1,0 +1,15 @@
+{
+  "name": "bank-management-system-root",
+  "version": "1.0.0",
+  "description": "Bank Management System Root Launcher",
+  "scripts": {
+    "install-all": "npm install && npm install --prefix backend && npm install --prefix admin-portal && npm install --prefix mobile-app",
+    "backend": "npm run dev --prefix backend",
+    "admin": "npm run dev --prefix admin-portal",
+    "mobile": "npm run start --prefix mobile-app",
+    "dev": "concurrently \"npm run backend\" \"npm run admin\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
